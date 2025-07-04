@@ -1,4 +1,4 @@
 function HomePage() {
-  return <div>홈페이지입니다.</div>;
+  return <h2>홈페이지입니다.</h2>
 }
 export default HomePage;
