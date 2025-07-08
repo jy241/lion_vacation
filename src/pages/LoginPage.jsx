@@ -29,7 +29,7 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
-      <h2>로그인</h2>
+      <h2 className='login-header'>로그인</h2>
       <input
         type="email"
         placeholder="이메일"
