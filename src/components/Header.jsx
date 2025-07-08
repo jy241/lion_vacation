@@ -1,3 +1,5 @@
+import './Header.css';
+
 function Header() {
   return (
     <header style ={{padding: "10px", backgroundColor: "#eee"}}>

@@ -1,48 +1,50 @@
-import {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 
-function LoginPage(){
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+import './LoginPage.css';
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); //새로고침 방지
-        console.log('로그인 시도:', {email, password});
-        alert(`로그인 시도: ${email}, ${password}`);
-    };
-
-    return (
-    <div style={{ padding: '20px' }}>
-      <h2>로그인</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '10px' }}>
-          <label>
-            이메일:
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              style={{ marginLeft: '10px' }}
-            />
-          </label>
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <label>
-            비밀번호:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              style={{ marginLeft: '10px' }}
-            />
-          </label>
-        </div>
-        <button type="submit">로그인</button>
-      </form>
-    </div>
-  );
-   
+const User = {
+  email: 'abc@naver.com',
+  pw: 'System2000!!'
 }
 
-export default LoginPage;
+export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [pw, setPw] = useState('');
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    document.title = '로그인 페이지';
+  }, []);
+
+  const handleLogin = () => {
+    if (email === User.email && pw === User.pw) {
+      alert('로그인 성공');
+      // 로그인 성공 후 대시보드로 이동
+      window.location.href = '/dashboard';
+    } else {
+      setError('이메일 또는 비밀번호가 잘못되었습니다.');
+    }
+  };
+
+  return (
+    <div className="login-page">
+      <h2>로그인</h2>
+      <input
+        type="email"
+        placeholder="이메일"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="비밀번호"
+        value={pw}
+        onChange={(e) => setPw(e.target.value)}
+      />
+      <button onClick={handleLogin}>로그인</button>
+      {error && <p className="error">{error}</p>}
+      <Link to="/signup">회원가입</Link>
+    </div>
+  );
+} 
